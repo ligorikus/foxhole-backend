@@ -25,7 +25,7 @@ Route::get('/auth/steam', [AuthController::class, 'steamAuth']);
 Route::get('/auth/steam/callback', [AuthController::class, 'steamCallback']);
 
 Route::group(['middleware' => ['auth:api']], function() {
-    Route::get('/users', function () {
-        return response()->json([123]);
+    Route::get('/user', function () {
+        return response()->json(['data' => auth()->user()]);
     });
 });
