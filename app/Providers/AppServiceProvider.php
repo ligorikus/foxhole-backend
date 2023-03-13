@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Services\FoxholeWarApi\FoxholeWarApi;
+use App\Services\FoxholeWarApi\FoxholeWarApiInterface;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        App::singleton(FoxholeWarApiInterface::class, function (Application $app) {
+            return new FoxholeWarApi();
+        });
     }
 }

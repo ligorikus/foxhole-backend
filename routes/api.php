@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SteamAuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -25,7 +26,6 @@ Route::get('/auth/steam', [AuthController::class, 'steamAuth']);
 Route::get('/auth/steam/callback', [AuthController::class, 'steamCallback']);
 
 Route::group(['middleware' => ['auth:api']], function() {
-    Route::get('/user', function () {
-        return response()->json(['data' => auth()->user()]);
-    });
+    Route::get('/me', [UserController::class, 'me']);
+    Route::post('/me/fraction', [UserController::class, 'selectFraction']);
 });
